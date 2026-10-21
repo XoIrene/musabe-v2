@@ -1,0 +1,117 @@
+:root { --ink:#212529; --muted:#6c757d; --line:#dee2e6; --bg:#f4f6f9; --brand:#007bff; --brand-dark:#0069d9; --brand-soft:#e7f1ff;
+  --accent:#2a8099; --nav:#2e3b4e; --nav-hover:#3b4b61; --danger:#dc3545; --ok:#1e7e34; --green-bg:#dcefd8; --green-ink:#2f6b32; --tag:#337ab7; --nav-w:230px }
+* { box-sizing: border-box }
+body { margin:0; font:15px/1.5 "Nunito","Segoe UI",system-ui,sans-serif; color:var(--ink); background:var(--bg) }
+
+/* ---- shell: icon rail that expands over the page on hover (like Supabase) ---- */
+:root { --rail:64px; --nav-w:232px }
+.shell { min-height:100vh }
+.content { min-width:0; margin-left:var(--rail) }
+aside { background:var(--nav); color:#cfd8e3; padding:12px 8px; display:flex; flex-direction:column; gap:10px; position:fixed; left:0; top:0; height:100vh; width:var(--rail);
+  overflow-y:auto; overflow-x:hidden; z-index:30; transition:width .18s ease, box-shadow .18s ease; scrollbar-width:none }
+aside::-webkit-scrollbar { display:none }
+aside:hover, aside:has(:focus-visible) { width:var(--nav-w); box-shadow:6px 0 24px rgba(0,0,0,.28) }
+.brand { display:flex; align-items:center; gap:10px; padding:6px 6px 14px; border-bottom:1px solid rgba(255,255,255,.12); white-space:nowrap }
+.logo { flex:0 0 40px; width:40px; height:40px; border-radius:50%; background:#fff; padding:3px; object-fit:contain; box-shadow:0 0 0 3px rgba(255,255,255,.2) }
+aside h1 { margin:0; font-size:17px; color:#fff } aside h1 span { font-weight:400; color:#cfd8e3 }
+nav { display:flex; flex-direction:column; gap:2px }
+nav a, .signout { display:flex; align-items:center; gap:14px; padding:10px 12px; border-radius:6px; color:#cfd8e3; text-decoration:none; white-space:nowrap; border:0; background:none; font:inherit; cursor:pointer; width:100%; text-align:left }
+nav a:hover, aside .signout:hover:not(:disabled) { background:var(--nav-hover); color:#fff }
+nav a.active { background:rgba(255,255,255,.16); color:#fff; font-weight:600 }
+.icon { flex:0 0 20px }
+.signout { margin-top:auto }
+/* labels fade in as the rail widens; the icons never move */
+aside nav a span, aside .signout span, aside h1 { opacity:0; transition:opacity .12s ease }
+aside:hover nav a span, aside:hover .signout span, aside:hover h1, aside:has(:focus-visible) nav a span, aside:has(:focus-visible) .signout span, aside:has(:focus-visible) h1 { opacity:1; transition-delay:.06s }
+.topbar { display:flex; align-items:center; gap:14px; background:#fff; border-bottom:1px solid var(--line); padding:8px 20px; position:sticky; top:0; z-index:10 }
+.burger { border:0; background:none; padding:6px; color:var(--muted); display:none }
+.burger:hover { color:var(--ink) }
+.crumbs { color:var(--muted); font-size:14px } .crumbs i { font-style:normal; margin:0 4px }
+.me { margin-left:auto; display:flex; flex-direction:column; text-align:right; line-height:1.2 } .me small { color:var(--muted) }
+main { padding:20px 24px; max-width:1200px }
+
+/* ---- page title card with the teal accent edge ---- */
+main > h2:first-child, main > .bar:first-child { background:#fff; border-left:4px solid var(--accent); border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,.18); padding:16px 18px; margin:0 0 18px }
+main > .bar:first-child h2 { margin:0 }
+h2 { margin:0 0 14px; font-size:20px; font-weight:600 } h3 { margin:0 0 10px; font-size:16px; font-weight:700 } h4 { margin:14px 0 6px }
+.bar { display:flex; gap:10px; align-items:center; flex-wrap:wrap } .bar h2 { margin-right:auto } .bar select { width:auto }
+
+/* ---- cards, stats ---- */
+.card { background:#fff; border:1px solid var(--line); border-radius:4px; box-shadow:0 1px 2px rgba(0,0,0,.08); padding:16px; margin-bottom:16px }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:14px; margin-bottom:16px }
+.stat { background:#fff; border:1px solid var(--line); border-left:4px solid var(--brand); border-radius:4px; box-shadow:0 1px 2px rgba(0,0,0,.08); padding:12px 14px; display:block }
+.stat b { font-size:26px; display:block } .stat span { color:var(--muted); font-size:13px } .stat:hover { border-color:var(--brand) }
+
+/* ---- green detail panel with blue label tags ---- */
+.panel-green { background:var(--green-bg); border-top:3px solid #28a745; border-radius:4px; box-shadow:0 1px 2px rgba(0,0,0,.08); padding:16px 18px; margin-bottom:16px; color:var(--green-ink) }
+.panel-green h3 { color:var(--green-ink); padding-bottom:8px; border-bottom:1px solid rgba(47,107,50,.25) }
+.fields { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:10px 16px }
+.tag { display:inline-block; background:var(--tag); color:#fff; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px; margin-bottom:2px }
+.val { background:#fff; border-radius:8px; padding:5px 10px }
+
+/* ---- tables ---- */
+table { width:100%; border-collapse:collapse }
+th { text-align:left; color:var(--ink); font-weight:700; font-size:13px; background:#f8f9fa; border-bottom:2px solid var(--line) }
+th, td { padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top } tr:last-child td { border-bottom:0 }
+tbody tr:hover { background:#f6f9fc }
+a { color:var(--brand) } .muted { color:var(--muted) } .mono, .code { font-family:ui-monospace,monospace; font-size:13px }
+.error { color:var(--danger) } .ok { color:var(--ok) }
+
+/* ---- forms, buttons ---- */
+label { display:block; margin-bottom:10px; font-size:13px; color:var(--muted) }
+input, select, textarea { display:block; width:100%; padding:8px 10px; border:1px solid #ced4da; border-radius:4px; font:inherit; color:var(--ink); background:#fff }
+input:focus, select:focus, textarea:focus { outline:0; border-color:#80bdff; box-shadow:0 0 0 3px rgba(0,123,255,.18) }
+.line { display:flex; gap:8px; margin-bottom:8px; flex-wrap:wrap } .line > * { flex:1 1 140px; width:auto } .line > button { flex:0 0 auto } .line input[type=number] { flex:0 0 80px }
+.two { display:grid; grid-template-columns:1fr 1fr; gap:12px }
+button, .btn { font:inherit; border:1px solid #ced4da; background:#fff; border-radius:4px; padding:8px 14px; cursor:pointer; text-decoration:none; color:var(--ink) }
+button:hover:not(:disabled) { background:#f1f3f5 }
+button.primary, .btn.primary { background:var(--brand); border-color:var(--brand); color:#fff } button.primary:hover { background:var(--brand-dark) }
+button.danger { background:#fff; border-color:var(--danger); color:var(--danger) }
+button.link { border:0; background:none; color:var(--brand); padding:2px 4px }
+.buttons { display:flex; gap:8px; flex-wrap:wrap }
+.pill { display:inline-block; padding:2px 10px; border-radius:99px; background:var(--brand-soft); color:var(--brand-dark); font-size:12px; margin:0 4px 4px 0 }
+.pill.completed, .pill.approved { background:#d4edda; color:var(--ok) } .pill.rejected { background:#f8d7da; color:var(--danger) }
+.row { display:grid; grid-template-columns:1fr auto auto; gap:12px; padding:9px 0; border-bottom:1px solid var(--line); color:inherit; text-decoration:none }
+.action { border-color:var(--brand); background:#f8fbff } .timeline { padding-left:18px; margin:0 } .timeline li { margin-bottom:8px }
+
+/* ---- pill tab bar: white rounded track, solid blue active pill ---- */
+.tabs { display:flex; gap:4px; margin:0 0 16px; background:#fff; border-radius:30px; padding:6px; box-shadow:0 1px 3px rgba(0,0,0,.12); flex-wrap:wrap }
+.tabs button { flex:1 1 0; border:0; background:none; border-radius:24px; padding:9px 14px; color:var(--muted); text-align:center }
+.tabs button:hover:not(.on) { background:#f1f3f5 } .tabs .on, .tabs button.on:hover { background:var(--brand); color:#fff }
+.card .tabs { box-shadow:none; border:1px solid var(--line) }
+.check { display:inline-flex; gap:4px; align-items:center; margin-right:14px; color:var(--ink) } .check input { width:auto }
+.code { display:inline-block; margin:3px 6px 3px 0; padding:2px 8px; border-radius:4px; background:#d4edda }
+.code.issued { background:#fff3cd } .code.lost, .code.damaged, .code.written_off { background:#f8d7da }
+
+/* ---- sign-in: centred card, institution name and logo on top ---- */
+.login-page { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; padding:24px 16px; position:relative; background:#f1f4f7 }
+.login-page::before { content:''; position:fixed; inset:0; background:url(/logo.png) center / min(70vmin,560px) no-repeat; opacity:.07; pointer-events:none }
+.login-card { position:relative; width:100%; max-width:360px; background:#fff; border-radius:4px; box-shadow:0 2px 12px rgba(0,0,0,.16) }
+.login-card header { text-align:center; padding:14px 16px 12px; border-bottom:1px solid var(--line); font-family:Georgia,"Times New Roman",serif }
+.login-card h1 { margin:0 0 6px; font-size:17px; letter-spacing:.2px; color:#2b2b2b }
+.login-card header img { display:block; width:120px; height:auto; margin:0 auto 4px }
+.login-card header strong { font-size:16px; color:#2b2b2b }
+.login-body { padding:22px 20px 20px }
+.input-group { display:flex; margin-bottom:14px }
+.input-group input { border-radius:4px 0 0 4px }
+.input-group .addon { flex:0 0 42px; display:grid; place-items:center; border:1px solid #ced4da; border-left:0; border-radius:0 4px 4px 0; background:#e9ecef; color:#495057; padding:0 }
+button.addon:hover:not(:disabled) { background:#dde1e5 }
+.login-row { display:flex; justify-content:space-between; align-items:center; margin:2px 0 16px } .login-row .check { margin:0 }
+.login-help { background:#fff8e1; border-left:3px solid #f0ad4e; padding:8px 10px; font-size:13px; margin:0 0 14px }
+button.signin { width:100%; background:#17a2b8; border-color:#17a2b8; padding:10px 14px } button.signin:hover:not(:disabled) { background:#138496 }
+.or { display:flex; align-items:center; gap:10px; color:var(--muted); font-size:14px; margin:20px 0 10px }
+.or::before, .or::after { content:''; flex:1; border-top:1px solid var(--line) }
+.login-note { margin:0; text-align:center; font-size:13px; color:var(--muted) }
+.login-foot { position:relative; color:var(--muted) }
+.center { text-align:center; margin-top:20vh }
+h4 + table { margin-bottom:8px }
+
+@media (max-width:900px) {
+  .content { margin-left:0 }
+  .burger { display:grid }
+  aside { width:var(--nav-w); transform:translateX(-100%); transition:transform .15s }
+  .shell.open aside { transform:none; box-shadow:4px 0 16px rgba(0,0,0,.3) }
+  aside nav a span, aside .signout span, aside h1 { opacity:1 }
+  main { padding:14px } .two { grid-template-columns:1fr } .me small { display:none }
+}
+@media print { aside, .noprint, .bar button { display:none !important } .content { margin-left:0 } main { padding:0; max-width:none } body { background:#fff } .card { border:0; padding:0; box-shadow:none } }
